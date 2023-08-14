@@ -1,0 +1,86 @@
+/* Define custom font styles using @font-face */
+@font-face {
+  font-family: "ColfaxAI";
+  src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2) format("woff2"),
+       url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff) format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ColfaxAI";
+  src: url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff2) format("woff2"),
+       url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff) format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* Apply font styles to elements with class "main" and their input children */
+.main,
+.main input {
+  font-size: 16px;
+  line-height: 24px;
+  color: #353740;
+  font-family: "ColfaxAI", Helvetica, sans-serif;
+}
+
+/* Styles for the main content container */
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 60px;
+}
+
+/* Styles for the icon image */
+.main .icon {
+  width: 34px;
+}
+
+/* Styles for the heading */
+.main h3 {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: bold;
+  color: #202123;
+  margin: 16px 0 40px;
+}
+
+/* Styles for the form */
+.main form {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+}
+
+/* Styles for the text input */
+.main input[type="text"] {
+  padding: 12px 16px;
+  border: 1px solid #10a37f;
+  border-radius: 4px;
+  margin-bottom: 24px;
+  outline-color: #10a37f;
+}
+
+/* Styles for the placeholder text */
+.main ::placeholder {
+  color: #8e8ea0;
+  opacity: 1;
+}
+
+/* Styles for the submit button */
+.main input[type="submit"] {
+  padding: 12px 0;
+  color: #fff;
+  background-color: #10a37f;
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* Styles for the result display area */
+.main .result {
+  margin-top: 40px;
+  width: 69ch;
+}

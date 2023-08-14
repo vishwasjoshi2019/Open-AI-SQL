@@ -1,35 +1,61 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// Import necessary styles and assets.
+import styles from './index.module.css';
+import sqlLogo from './assets/sql-logo.png';
+import { useState } from 'react';
 
+// Define the main App component.
 function App() {
-  const [count, setCount] = useState(0)
+  // State variables for query description and generated SQL query.
+  const [queryDescription, setQueryDescription] = useState("");
+  const [sqlQuery, setSqlQuery] = useState("");
 
+  // Function to handle form submission.
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    // Call the generateQuery function to fetch and set the generated SQL query.
+    const generatedQuery = await generateQuery();
+    setSqlQuery(generatedQuery);
+    console.log("Returned from server:", sqlQuery);
+  };
+
+  // Function to fetch and generate SQL query.
+  const generateQuery = async () => {
+    // Send a POST request to the server's "/generate" endpoint.
+    const response = await fetch("http://localhost:3005/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ queryDescription: queryDescription }),
+    });
+
+    // Parse the response data as JSON and return the trimmed SQL query.
+    const data = await response.json();
+    return data.response.trim();
+  };
+
+  // Render the UI components.
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <main className={styles.main}>
+      {/* Display the SQL logo */}
+      <img src={sqlLogo} alt="" className={styles.icon} />
+      <h3>Generate SQL with AI</h3>
+      <form onSubmit={onSubmit}>
+        {/* Input field to describe the query */}
+        <input
+          type="text"
+          name="query description"
+          placeholder="Describe your query"
+          onChange={(e) => setQueryDescription(e.target.value)}
+        />
+        {/* Submit button */}
+        <input type="submit" value="Generate Query" />
+        {/* Display the generated SQL query */}
+        <pre>{sqlQuery}</pre>
+      </form>
+    </main>
+  );
 }
 
-export default App
+// Export the App component.
+export default App;
