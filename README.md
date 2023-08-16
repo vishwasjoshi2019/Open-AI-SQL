@@ -10,7 +10,7 @@ This full-stack application consists of both a client and a server component, ea
 
 ## Getting Started
 
-To begin, clone this repository to your local machine and navigate to the root directory. The repository includes two main folders: "client" for the front end and "server" for the backend.
+Clone this repository to your local machine and navigate to the root directory. The repository includes two main folders: "client" for the front end and "server" for the back end.
 
 ### Installing Dependencies
 
